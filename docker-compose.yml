@@ -1,0 +1,21 @@
+version: '3'
+services:
+  worker:
+    build: .
+    command: "ruby app.rb"
+    volumes:
+      - .:/myapp
+    environment: 
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - LOG_LEVEL=info
+      - INTERVAL=60
+      - LXD_HOSTS=wcl-lxd-fake-api.herokuapp.com:443
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/datas
+    
+volumes:
+  redis:
