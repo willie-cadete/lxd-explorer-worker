@@ -1,6 +1,7 @@
 require 'logger'
 require 'hyperkit'
 require 'redis'
+require 'json'
 
 
 $stdout.sync = true
@@ -107,8 +108,8 @@ while true
       redis.save_container(
         "c:#{container}",
         ENV['INTERVAL'].to_i + 60,
-        info: lxd.get_container_info(container),
-        state: lxd.get_container_state(container)
+        info: lxd.get_container_info(container).to_json,
+        state: lxd.get_container_state(container).to_json
         )
     end
     logger.info("Containers data have been saved")
