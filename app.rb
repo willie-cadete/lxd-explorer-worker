@@ -12,6 +12,8 @@ logger.info("Application has been started.")
 
 module LxdModule
   class Server
+    attr_reader :api_endpoint
+
     def initialize(api_endpoint, client_cert, client_key, loglevel="info")
       @logger = Logger.new(STDOUT)
       @logger.level = loglevel
@@ -108,6 +110,7 @@ while true
       redis.save_container(
         "c:#{container}",
         ENV['INTERVAL'].to_i + 60,
+        host: URI.parse(lxd.api_endpoint).hostname,
         info: lxd.get_container_info(container).to_json,
         state: lxd.get_container_state(container).to_json
         )
