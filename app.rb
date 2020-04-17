@@ -108,9 +108,8 @@ while true
     
     lxd.get_containers.each do |container|
       redis.save_container(
-        "c:#{container}",
+        "lxd:#{URI.parse(lxd.api_endpoint).hostname}:#{container}",
         ENV['INTERVAL'].to_i + 60,
-        host: URI.parse(lxd.api_endpoint).hostname,
         info: lxd.get_container_info(container).to_json,
         state: lxd.get_container_state(container).to_json
         )
