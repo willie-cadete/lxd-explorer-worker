@@ -1,5 +1,5 @@
-source :rubygems
+source 'https://rubygems.org'
 
-gem 'hyperkit'
 gem 'faraday', '0.17.3'
+gem 'hyperkit'
 gem 'redis'
