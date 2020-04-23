@@ -1,16 +1,17 @@
 version: '3'
 services:
   worker:
-    build: .
-    command: "ruby app.rb"
+    image: williecadete/lxd-explorer-worker:latest
     volumes:
-      - .:/myapp
+      - ./keys:/myapp/keys
     environment: 
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - LOG_LEVEL=info
       - INTERVAL=60
-      - LXD_HOSTS=wcl-lxd-fake-api.herokuapp.com:443
+      - LXD_HOSTS=lxd1.example.com:8443,lxd2.example.com:8443
+      - CLIENT_CERT=keys/client.crt
+      - CLIENT_KEY=keys/client.key
 
   redis:
     image: redis:alpine
