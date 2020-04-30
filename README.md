@@ -65,8 +65,10 @@ https://docs.docker.com/compose/environment-variables/
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - LOG_LEVEL=info
-      - INTERVAL=60 #interval to gather the information from LXD hosts in seconds
-      - LXD_HOSTS=lxd1.example.com:8443,lxd2.example.com:8443 # you must add the port
+      #interval to gather the information from LXD hosts in seconds
+      - INTERVAL=60
+      # By default the enpoint use HTTPS at 8443 port, if you are using a different setting you must add the scheme and port to URL
+      - LXD_HOSTS=lxd1.example.com,https://lxd2.example.com:8000
       - CLIENT_CERT=keys/client.crt
       - CLIENT_KEY=keys/client.key
 ```

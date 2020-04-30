@@ -17,7 +17,7 @@ class Lxd
                 Logger.new(STDOUT)
               end
     @logger.level = loglevel
-    @api_endpoint = 'https://' + api_endpoint
+    @api_endpoint = parse_url(api_endpoint)
     @client_cert = client_cert
     @client_key = client_key
     connect
@@ -66,5 +66,16 @@ class Lxd
   rescue StandardError => e
     @logger.error "#{@client.api_endpoint} - Unable to get container state: #{e}"
     {}
+  end
+
+  private
+
+  # Return the URI with https scheme and 8443 port if only URL is passed
+  # @param url
+  # @return [String]
+  def parse_url(url)
+    uri = URI.parse(url)
+    return "https://#{uri.to_s}:8443" if uri.scheme.nil? and uri.port.nil?
+    uri.to_s
   end
 end
