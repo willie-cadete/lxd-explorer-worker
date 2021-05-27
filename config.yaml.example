@@ -1,0 +1,15 @@
+---
+app:
+  interval: 60
+  certs:
+    certificate: keys/client.crt
+    key: keys/client.key
+  log:
+    level: debug
+  redis:
+    host: redis
+    port: 6379
+
+lxd_hosts:
+  - lxd1.example.com:8443
+  - lxd2.example.com:8443
