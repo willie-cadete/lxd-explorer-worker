@@ -1,0 +1,23 @@
+version: '3'
+services:
+  worker:
+    image: williecadete/lxd-explorer-worker:latest
+    volumes:
+      - ./keys:/myapp/keys
+      - ./config/config.yml:/myapp/config/config.yml
+    environment: 
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - LOG_LEVEL=info
+      - INTERVAL=60
+      - LXD_HOSTS=lxd1.example.com:8443,lxd2.example.com:8443
+      - CLIENT_CERT=keys/client.crt
+      - CLIENT_KEY=keys/client.key
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/datas
+    
+volumes:
+  redis:
