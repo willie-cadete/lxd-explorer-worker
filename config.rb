@@ -1,6 +1,6 @@
 require 'yaml'
 
-config = YAML.load(File.read("config.yaml"))
+config = YAML.load(File.read("config/config.yaml"))
 
 INTERVAL = config["app"]["interval"]
 CLIENT_CERT = config["app"]["certs"]["certificate"]
